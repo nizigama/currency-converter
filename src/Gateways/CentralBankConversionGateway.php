@@ -16,7 +16,7 @@ class CentralBankConversionGateway implements GatewayInterface
 
         $url = Config::get("currency-converter.european_central_bank_conversion_api");
 
-        $conversionRatesRequest = Http::get($url);
+        $conversionRatesRequest = Http::connectTimeout(100)->get($url);
 
         if ($conversionRatesRequest->failed()) {
             throw new Exception("Failed to fetch conversion rates");
