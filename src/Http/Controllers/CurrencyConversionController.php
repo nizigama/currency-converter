@@ -8,8 +8,9 @@ class CurrencyConversionController extends Controller
 {
     public function convert(string $currency, int $amount)
     {
-        $convertedAmount = Converter::exchange($currency, $amount);
+        $converter = Converter::getRate($currency);
+        $convertedAmount = $converter->exchange($amount);
 
-        return response()->json(["amount" => $convertedAmount]);
+        return response()->json(["amount" => $convertedAmount, "rate" => $converter->rate]);
     }
 }
