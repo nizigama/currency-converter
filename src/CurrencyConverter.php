@@ -21,10 +21,10 @@ class CurrencyConverter
 
     /**
      * Get converted amount in USD
-     * @var int $amount in cents
+     * @var float $amount
      * @throws Exception in case it failed to reach the Central Bank API
      */
-    public function inUSD(int $amount): float
+    public function inUSD(float $amount): float
     {
         $rate = $this->gatewayInterface->getConversionRate("usd");
         return $amount * $rate;
@@ -45,13 +45,13 @@ class CurrencyConverter
     /**
      * Get converted amount from Euro to given currency
      * @var string $currency
-     * @return int $amount in cents
+     * @return float $amount
      * @return float $result
      * @throws Exception in case it failed to reach the Central Bank API
      */
-    public function exchange(string $currency, int $amount): float
+    public function exchange(string $currency, float $amount): float
     {
         $rate = $this->gatewayInterface->getConversionRate($currency);
-        return $amount * $rate;
+        return round($amount * $rate, 2);
     }
 }

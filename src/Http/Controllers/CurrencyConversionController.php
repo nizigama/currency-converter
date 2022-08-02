@@ -6,7 +6,7 @@ use Nizigama\CurrencyConverter\Facades\Converter;
 
 class CurrencyConversionController extends Controller
 {
-    public function convert(?string $currency = null, int $amount)
+    public function convert(string $currency, int $amount)
     {
         $convertedAmount = Converter::exchange($currency, $amount);
 
