@@ -65,7 +65,7 @@ class CurrencyConverterTest extends TestCase
     /** @test */
     public function can_get_converted_amount_using_rate_from_central_bank_api(): void
     {
-        $convertedAmount = Converter::exchange("usd", 2500);
+        $convertedAmount = Converter::exchange(2500, "usd");
 
         $this->assertSame($convertedAmount, round(1.0233 * 2500, 2));
     }
