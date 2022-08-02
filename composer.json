@@ -1,0 +1,33 @@
+{
+  "name": "nizigama/currency-converter",
+  "description": "Get the exchange rate of a currency from the European Central Bank",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Nizigama\\CurrencyConverter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Nizigama\\CurrencyConverter\\Tests\\": "tests"
+    }
+  },
+  "authors": [
+    {
+      "name": "Nizigama jean davy",
+      "email": "jedavy.n@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "orchestra/testbench": "^6.24",
+    "phpunit/phpunit": "^9.5"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Nizigama\\CurrencyConverter\\CurrencyConverterServiceProvider"
+      ]
+    }
+  }
+}
