@@ -11,6 +11,7 @@ class CurrencyConverter
 {
 
     protected string $currency;
+    public float $rate;
     protected GatewayInterface $gatewayInterface;
 
     public function __construct(string $currency, GatewayInterface $gatewayInterface)
@@ -36,10 +37,11 @@ class CurrencyConverter
      * @return float $rate
      * @throws Exception in case it failed to get conversion rate from Central Bank API
      */
-    public function getRate(string $currency): float
+    public function getRate(string $currency): self
     {
-        $rate = $this->gatewayInterface->getConversionRate($currency);
-        return $rate;
+        $this->currency = $currency;
+        $this->rate = $this->gatewayInterface->getConversionRate($currency);
+        return $this;
     }
 
     /**
@@ -47,11 +49,14 @@ class CurrencyConverter
      * @var string $currency
      * @return float $amount
      * @return float $result
-     * @throws Exception in case it failed to reach the Central Bank API
+     * @throws Exception in case it failed to reach the Central Bank API or when no currency was provided
      */
-    public function exchange(string $currency, float $amount): float
+    public function exchange(float $amount, ?string $currency = null): float
     {
-        $rate = $this->gatewayInterface->getConversionRate($currency);
+        if (is_null($currency) && is_null($this->currency)) {
+            throw new Exception("No currency found");
+        }
+        $rate = $this->gatewayInterface->getConversionRate($currency ?? $this->currency);
         return round($amount * $rate, 2);
     }
 }
