@@ -29,5 +29,8 @@
         "Nizigama\\CurrencyConverter\\CurrencyConverterServiceProvider"
       ]
     }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.4"
   }
 }
